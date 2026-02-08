@@ -61,7 +61,7 @@ public class Parking {
             }
 
             ParkingSpot parkingSpot = freeSpots.poll();
-            logger.info("Car {} took spot {}", car, parkingSpot.getId());
+            logger.info("Car {} took spot {}", car.getId(), parkingSpot.getId());
 
             return parkingSpot;
         } catch (InterruptedException e) {

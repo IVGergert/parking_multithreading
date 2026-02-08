@@ -33,7 +33,7 @@ public class Car implements Callable<String> {
 
         if (parkingSpot != null) {
             try {
-                TimeUnit.MILLISECONDS.sleep(50);
+                TimeUnit.SECONDS.sleep(5);
             } catch (InterruptedException e) {
                 logger.error("Car {} was interrupted during parking", id);
                 Thread.currentThread().interrupt();
