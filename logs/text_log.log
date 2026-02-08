@@ -193,3 +193,21 @@ java.nio.file.NoSuchFileException: data\cars.txt
 2026-02-08 11:29:26.774 [pool-2-thread-21] INFO  com.gergert.parking.entity.Parking - Car com.gergert.parking.entity.Car@6eec26cf took spot 1
 2026-02-08 11:29:26.835 [pool-2-thread-21] INFO  com.gergert.parking.entity.Parking - 1 released. Expected VIPs: 0
 2026-02-08 11:29:26.836 [main] INFO  com.gergert.parking.Main - Application finished successfully.
+2026-02-08 11:36:26.915 [main] INFO  com.gergert.parking.Main - Starting application
+2026-02-08 11:36:26.921 [main] INFO  gergert.parking.reader.impl.ReadDataFromFileImpl - Reading file: data/cars
+2026-02-08 11:36:26.922 [main] ERROR gergert.parking.reader.impl.ReadDataFromFileImpl - Error reading file data\cars
+java.nio.file.NoSuchFileException: data\cars
+	at java.base/sun.nio.fs.WindowsException.translateToIOException(WindowsException.java:85)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:103)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:108)
+	at java.base/sun.nio.fs.WindowsFileSystemProvider.newByteChannel(WindowsFileSystemProvider.java:234)
+	at java.base/java.nio.file.Files.newByteChannel(Files.java:380)
+	at java.base/java.nio.file.Files.newByteChannel(Files.java:432)
+	at java.base/java.nio.file.spi.FileSystemProvider.newInputStream(FileSystemProvider.java:420)
+	at java.base/java.nio.file.Files.newInputStream(Files.java:160)
+	at java.base/java.nio.file.Files.newBufferedReader(Files.java:2921)
+	at java.base/java.nio.file.Files.readAllLines(Files.java:3416)
+	at java.base/java.nio.file.Files.readAllLines(Files.java:3457)
+	at com.gergert.parking.reader.impl.ReadDataFromFileImpl.readFromFile(ReadDataFromFileImpl.java:23)
+	at com.gergert.parking.Main.main(Main.java:26)
+2026-02-08 11:36:26.923 [main] ERROR com.gergert.parking.Main - No data found.

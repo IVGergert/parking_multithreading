@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Main {
     private static final Logger logger = LogManager.getLogger();
-    private static final String FILE_PATH = "data/cars";
+    private static final String FILE_PATH = "data/cars.txt";
 
     public static void main(String[] args) {
         logger.info("Starting application");
