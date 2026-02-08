@@ -32,11 +32,15 @@ public class Main {
 
         List<Car> cars = carParser.parse(lines);
 
+        for (Car car : cars){
+            String status = car.isVip() ? "VIP" : "DEFAULT";
+            logger.info("Car id = {} | Status = {}", car.getId(), status);
+        }
+
+
         ExecutorService executorService = Executors.newCachedThreadPool();
 
         for (Car car : cars){
-            String status = car.isVip() ? "VIP" : "DEFAULT";
-            logger.info("Car id = {}, Status = {}", car.getId(), car.isVip());
             executorService.submit(car);
         }
 

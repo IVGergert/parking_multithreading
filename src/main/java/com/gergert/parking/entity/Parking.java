@@ -43,10 +43,11 @@ public class Parking {
         lock.lock();
         try {
             boolean isVip = car.isVip();
+            String status = isVip ? "VIP" : "DEFAULT";
 
             if (isVip){
                 waitingPriorityCount++;
-                logger.debug("Car: {} vip waits for spot.", car.getId());
+                logger.debug("Car {} | {} waits for spot.", car.getId(), status);
 
                 while (freeSpots.isEmpty()){
                     priorityQueue.await();
@@ -55,13 +56,13 @@ public class Parking {
                 waitingPriorityCount--;
             } else {
                 while (freeSpots.isEmpty() || waitingPriorityCount > 0) {
-                    logger.debug("Car {} normal waits.", car.getId());
+                    logger.debug("Car {} | {} waits for spot.", car.getId(), status);
                     normalQueue.await();
                 }
             }
 
             ParkingSpot parkingSpot = freeSpots.poll();
-            logger.info("Car {} took spot {}", car.getId(), parkingSpot.getId());
+            logger.info("Car {} | {} took spot {}", car.getId(), status, parkingSpot.getId());
 
             return parkingSpot;
         } catch (InterruptedException e) {
@@ -80,7 +81,7 @@ public class Parking {
         lock.lock();
         try {
             freeSpots.add(parkingSpot);
-            logger.info("{} released. Expected VIPs: {}", parkingSpot.getId(), waitingPriorityCount);
+            logger.info("{} released.", parkingSpot.getId());
 
             if (waitingPriorityCount > 0) {
                 priorityQueue.signal();
