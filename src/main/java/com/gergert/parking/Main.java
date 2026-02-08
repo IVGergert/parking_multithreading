@@ -35,6 +35,8 @@ public class Main {
         ExecutorService executorService = Executors.newCachedThreadPool();
 
         for (Car car : cars){
+            String status = car.isVip() ? "VIP" : "DEFAULT";
+            logger.info("Car id = {}, Status = {}", car.getId(), car.isVip());
             executorService.submit(car);
         }
 
