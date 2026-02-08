@@ -35,12 +35,15 @@ public class Car implements Callable<String> {
             try {
                 TimeUnit.MILLISECONDS.sleep(50);
             } catch (InterruptedException e) {
+                logger.error("Car {} was interrupted during parking", id);
                 Thread.currentThread().interrupt();
+            } finally {
+                parking.releaseSpot(parkingSpot);
             }
+
+            return "Car " + id + " finished";
         }
 
-        parking.releaseSpot(parkingSpot);
-
-        return "Car " + id + " finished";
+        return "Car " + id + " failed to park";
     }
 }
